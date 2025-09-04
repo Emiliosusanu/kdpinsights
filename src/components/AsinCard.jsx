@@ -76,7 +76,12 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
     return new Intl.NumberFormat('it-IT').format(num);
   };
 
-  const isAvailable = data.stock_status && (data.stock_status.toLowerCase().includes('in stock') || data.stock_status.toLowerCase().includes('disponibile'));
+// use backend availability_code
+const availability = (data.availability_code || '').toUpperCase();
+const inStock = availability === 'IN_STOCK';
+const availabilityClass = inStock ? 'text-green-400' : 'text-red-400';
+const AvailabilityIcon = inStock ? PackageCheck : PackageX;
+
 
   return (
     <motion.div
@@ -95,9 +100,9 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
           <h3 className="text-lg font-bold text-foreground line-clamp-2">{data.title || 'Titolo non disponibile'}</h3>
           <p className="text-sm text-muted-foreground mb-1">{data.author || 'Autore non disponibile'}</p>
           <p className="text-xs text-muted-foreground/70">ASIN: {data.asin}</p>
-          <div className={`flex items-center gap-1.5 text-xs mt-1 ${isAvailable ? 'text-green-400' : 'text-orange-400'}`}>
-            {isAvailable ? <PackageCheck className="w-3.5 h-3.5" /> : <PackageX className="w-3.5 h-3.5" />}
-            <span className="font-semibold">{data.stock_status || 'Sconosciuto'}</span>
+<div className={`flex items-center gap-1.5 text-xs mt-1 ${availabilityClass}`}>
+  <AvailabilityIcon className="w-3.5 h-3.5" />
+  <span className="font-semibold">{data.stock_status || 'Sconosciuto'}</span>
           </div>
         </div>
       </div>
