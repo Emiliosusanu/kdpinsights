@@ -1,10 +1,7 @@
 import React from 'react';
 import Sidebar from '@/components/layout/Sidebar';
 import MobileNav from '@/components/layout/MobileNav';
-<<<<<<< HEAD
-=======
 import NotificationPet from '@/components/NotificationPet';
->>>>>>> 170550e (init: project baseline)
 
 const DashboardLayout = ({ children }) => {
   return (
@@ -16,11 +13,8 @@ const DashboardLayout = ({ children }) => {
         </main>
       </div>
       <MobileNav />
-<<<<<<< HEAD
-=======
       {/* Minimal floating notifications pet */}
       <NotificationPet />
->>>>>>> 170550e (init: project baseline)
     </div>
   );
 };
