@@ -7,3 +7,8 @@ dist/
 >>>>>>> 170550e (init: project baseline)
 .env
 .DS_Store
+node_modules/
+dist/
+.DS_Store
+.env
+
