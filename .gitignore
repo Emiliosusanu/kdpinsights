@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 node_modules
 dist
+=======
+node_modules/
+dist/
+>>>>>>> 170550e (init: project baseline)
 .env
 .DS_Store

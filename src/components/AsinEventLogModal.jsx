@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/customSupabaseClient';
+<<<<<<< HEAD
 import { Loader2, X, History, ShoppingCart, Star, BarChart, AlertTriangle, PlusCircle } from 'lucide-react';
+=======
+import { Loader2, X, History, ShoppingCart, Star, BarChart, AlertTriangle, PlusCircle, TrendingDown, TrendingUp } from 'lucide-react';
+>>>>>>> 170550e (init: project baseline)
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
@@ -14,6 +18,46 @@ const eventIcons = {
   default: <History className="w-5 h-5 text-gray-400" />,
 };
 
+<<<<<<< HEAD
+=======
+const formatNumber = (num) => {
+  if (num === null || num === undefined || Number.isNaN(Number(num))) return '—';
+  return new Intl.NumberFormat('it-IT').format(Number(num));
+};
+
+const BsrChangeRow = ({ event }) => {
+  const meta = event?.metadata || {};
+  const prev = Number(meta.old ?? meta.from ?? meta.previous ?? meta.prev);
+  const curr = Number(meta.new ?? meta.to ?? meta.current ?? meta.now);
+  const valid = Number.isFinite(prev) && Number.isFinite(curr) && prev > 0 && curr > 0;
+  const worse = valid ? curr > prev : false; // higher BSR is worse
+  const better = valid ? curr < prev : false;
+  const diff = valid ? curr - prev : null;
+  const rel = valid ? ((curr - prev) / prev) * 100 : null;
+  const color = better ? 'text-emerald-400' : worse ? 'text-red-400' : 'text-gray-300';
+  const Icon = better ? TrendingDown : worse ? TrendingUp : BarChart;
+
+  return (
+    <div className="pl-4">
+      <div className={`flex items-center gap-2 font-medium ${color}`}>
+        <Icon className="w-4 h-4" />
+        <span>BSR</span>
+        {valid && (
+          <span className="text-gray-300">{formatNumber(prev)} → </span>
+        )}
+        <span className={`${color} font-semibold`}>{valid ? formatNumber(curr) : '—'}</span>
+      </div>
+      {valid && (
+        <div className="text-xs text-gray-400 mt-0.5">
+          Delta: <span className={`${color} font-semibold`}>{diff > 0 ? '+' : ''}{formatNumber(diff)}{rel !== null ? ` (${rel > 0 ? '+' : ''}${rel.toFixed(1)}%)` : ''}</span>
+        </div>
+      )}
+      <p className="text-[11px] text-muted-foreground mt-1">{new Date(event.created_at).toLocaleString('it-IT')}</p>
+    </div>
+  );
+};
+
+>>>>>>> 170550e (init: project baseline)
 const AsinEventLogModal = ({ asinData, isOpen, onClose }) => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,10 +110,21 @@ const AsinEventLogModal = ({ asinData, isOpen, onClose }) => {
                   <div className="absolute -left-8 top-1.5 flex items-center justify-center w-8 h-8 bg-slate-800 rounded-full border-2 border-slate-700">
                     {getEventIcon(event.event_type)}
                   </div>
+<<<<<<< HEAD
                   <div className="pl-4">
                     <p className="font-semibold text-foreground">{event.description}</p>
                     <p className="text-xs text-muted-foreground">{new Date(event.created_at).toLocaleString('it-IT')}</p>
                   </div>
+=======
+                  {event.event_type === 'BSR_CHANGED' ? (
+                    <BsrChangeRow event={event} />
+                  ) : (
+                    <div className="pl-4">
+                      <p className="font-semibold text-foreground">{event.description}</p>
+                      <p className="text-xs text-muted-foreground">{new Date(event.created_at).toLocaleString('it-IT')}</p>
+                    </div>
+                  )}
+>>>>>>> 170550e (init: project baseline)
                 </div>
               ))}
             </div>

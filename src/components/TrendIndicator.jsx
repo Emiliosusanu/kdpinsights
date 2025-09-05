@@ -17,12 +17,22 @@ const trendConfig = {
   },
 };
 
+<<<<<<< HEAD
 const TrendIndicator = ({ trend }) => {
   if (!trend || !trendConfig[trend]) {
     return <div className="w-4 h-4" />; // Placeholder for alignment
   }
 
   const { Icon, color } = trendConfig[trend];
+=======
+const TrendIndicator = ({ trend, small = false }) => {
+  if (!trend || !trendConfig[trend]) {
+    return <div className={small ? "w-4 h-4" : "w-5 h-5"} />; // Placeholder for alignment
+  }
+
+  const { Icon, color } = trendConfig[trend];
+  const sizeCls = small ? 'w-4 h-4' : 'w-5 h-5';
+>>>>>>> 170550e (init: project baseline)
 
   return (
     <motion.div
@@ -33,7 +43,11 @@ const TrendIndicator = ({ trend }) => {
       transition={{ duration: 0.4, type: 'spring', stiffness: 300, damping: 20 }}
       className={`inline-flex items-center ${color}`}
     >
+<<<<<<< HEAD
       <Icon className="w-5 h-5" />
+=======
+      <Icon className={sizeCls} />
+>>>>>>> 170550e (init: project baseline)
     </motion.div>
   );
 };

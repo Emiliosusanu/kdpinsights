@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+import React, { useState, useEffect, useMemo } from 'react';
+>>>>>>> 170550e (init: project baseline)
 import { motion, AnimatePresence } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { supabase } from '@/lib/customSupabaseClient';
@@ -6,6 +10,10 @@ import { Loader2, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DateRangePicker from '@/components/DateRangePicker';
 import { addDays, format } from 'date-fns';
+<<<<<<< HEAD
+=======
+import useLocalStorage from '@/hooks/useLocalStorage';
+>>>>>>> 170550e (init: project baseline)
 
 const AsinTrendChart = ({ asinData, onClose }) => {
   const [history, setHistory] = useState([]);
@@ -14,6 +22,10 @@ const AsinTrendChart = ({ asinData, onClose }) => {
     from: addDays(new Date(), -60),
     to: new Date(),
   });
+<<<<<<< HEAD
+=======
+  const [normalize, setNormalize] = useLocalStorage('asinTrendChartNormalize', true);
+>>>>>>> 170550e (init: project baseline)
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -38,11 +50,25 @@ const AsinTrendChart = ({ asinData, onClose }) => {
       if (error) {
         console.error('Error fetching history:', error);
       } else {
+<<<<<<< HEAD
         const formattedData = data.map(item => ({
           date: new Date(item.created_at).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' }),
           BSR: item.bsr,
           Recensioni: item.review_count,
         }));
+=======
+        const formattedData = data.map(item => {
+          const d = new Date(item.created_at);
+          const dateKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+          const label = d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short' });
+          return {
+            dateKey,
+            date: label,
+            BSR: Number(item.bsr),
+            Recensioni: Number(item.review_count),
+          };
+        });
+>>>>>>> 170550e (init: project baseline)
         setHistory(formattedData);
       }
       setLoading(false);
@@ -53,6 +79,58 @@ const AsinTrendChart = ({ asinData, onClose }) => {
     }
   }, [asinData, dateRange]);
 
+<<<<<<< HEAD
+=======
+  const dataForChart = useMemo(() => {
+    if (!normalize) return history;
+    const map = new Map();
+    for (const it of history) {
+      const key = it.dateKey;
+      if (!key) continue;
+      const g = map.get(key) || { minBSR: Infinity, maxRev: 0, key };
+      const bsr = Number(it.BSR);
+      const rev = Number(it.Recensioni);
+      if (isFinite(bsr) && bsr > 0) {
+        g.minBSR = Math.min(g.minBSR, bsr);
+      }
+      if (isFinite(rev) && rev > 0) g.maxRev = Math.max(g.maxRev, rev);
+      map.set(key, g);
+    }
+    const normalized = Array.from(map.values())
+      .sort((a, b) => a.key.localeCompare(b.key))
+      .map(g => {
+        const [y, m, d] = g.key.split('-').map(Number);
+        const label = new Date(y, (m || 1) - 1, d || 1).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' });
+        return {
+          dateKey: g.key,
+          date: label,
+          BSR: isFinite(g.minBSR) ? g.minBSR : null,
+          Recensioni: g.maxRev,
+        };
+      });
+
+    // Forward-fill: if a day's BSR or Reviews are null/0, use previous day's value
+    let prevBSR = null;
+    let prevRev = null;
+    for (const row of normalized) {
+      const b = Number(row.BSR);
+      if (!isFinite(b) || b === 0) {
+        if (prevBSR != null) row.BSR = prevBSR;
+      } else {
+        prevBSR = b;
+      }
+
+      const r = Number(row.Recensioni);
+      if (!isFinite(r) || r === 0) {
+        if (prevRev != null) row.Recensioni = prevRev;
+      } else {
+        prevRev = r;
+      }
+    }
+    return normalized;
+  }, [history, normalize]);
+
+>>>>>>> 170550e (init: project baseline)
   return (
     <AnimatePresence>
       <motion.div
@@ -79,8 +157,16 @@ const AsinTrendChart = ({ asinData, onClose }) => {
             </Button>
           </div>
 
+<<<<<<< HEAD
           <div className="mb-4">
             <DateRangePicker date={dateRange} setDate={setDateRange} />
+=======
+          <div className="mb-4 flex items-center justify-between">
+            <DateRangePicker date={dateRange} setDate={setDateRange} />
+            <Button onClick={() => setNormalize(v => !v)} variant={normalize ? 'default' : 'outline'} size="sm" className="border-border text-muted-foreground hover:text-foreground">
+              {normalize ? 'Normalizza: ON' : 'Normalizza: OFF'}
+            </Button>
+>>>>>>> 170550e (init: project baseline)
           </div>
 
           <div className="flex-grow">
@@ -88,9 +174,15 @@ const AsinTrendChart = ({ asinData, onClose }) => {
               <div className="flex items-center justify-center h-full">
                 <Loader2 className="w-12 h-12 text-white animate-spin" />
               </div>
+<<<<<<< HEAD
             ) : history.length > 1 ? (
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={history} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
+=======
+            ) : dataForChart.length > 1 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={dataForChart} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
+>>>>>>> 170550e (init: project baseline)
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
                   <XAxis dataKey="date" stroke="rgba(255, 255, 255, 0.5)" />
                   <YAxis yAxisId="left" stroke="#82ca9d" orientation="left" label={{ value: 'BSR', angle: -90, position: 'insideLeft', fill: '#82ca9d' }} reversed={true} />
@@ -101,7 +193,14 @@ const AsinTrendChart = ({ asinData, onClose }) => {
                       borderColor: 'rgba(255, 255, 255, 0.2)',
                       color: '#fff'
                     }}
+<<<<<<< HEAD
                     formatter={(value, name) => [value.toLocaleString('it-IT'), name]}
+=======
+                    formatter={(value, name) => [
+                      (typeof value === 'number' && isFinite(value)) ? value.toLocaleString('it-IT') : '—',
+                      name
+                    ]}
+>>>>>>> 170550e (init: project baseline)
                   />
                   <Legend wrapperStyle={{ color: '#fff' }} />
                   <Line yAxisId="left" type="monotone" dataKey="BSR" stroke="#82ca9d" strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 6 }} />

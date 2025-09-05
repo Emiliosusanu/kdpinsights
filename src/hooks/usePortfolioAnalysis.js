@@ -2,6 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
+<<<<<<< HEAD
+=======
+import { estimateRoyalty } from '@/lib/royaltyEstimator';
+>>>>>>> 170550e (init: project baseline)
 
 const usePortfolioAnalysis = (periodInDays) => {
   const { user } = useAuth();
@@ -91,7 +95,12 @@ const usePortfolioAnalysis = (periodInDays) => {
 
       const bsrChange = (latest.bsr || 0) - (oldest.bsr || 0);
       const sales = calculateSalesFromBsr(latest.bsr);
+<<<<<<< HEAD
       const income = calculateIncome(sales, asin.royalty);
+=======
+      const effectiveRoyalty = (asin.royalty && asin.royalty > 0) ? asin.royalty : estimateRoyalty(asin);
+      const income = calculateIncome(sales, effectiveRoyalty);
+>>>>>>> 170550e (init: project baseline)
       const avgMonthlyIncome = (income.monthly[0] + income.monthly[1]) / 2;
       const reviewsChange = (latest.review_count || 0) - (oldest.review_count || 0);
 
@@ -121,7 +130,12 @@ const usePortfolioAnalysis = (periodInDays) => {
         const asin = asins.find(a => a.id === record.asin_data_id);
         if(!asin || !record.bsr) return total;
         const sales = calculateSalesFromBsr(record.bsr);
+<<<<<<< HEAD
         const income = calculateIncome(sales, asin.royalty);
+=======
+        const eff = (asin.royalty && asin.royalty > 0) ? asin.royalty : estimateRoyalty(asin);
+        const income = calculateIncome(sales, eff);
+>>>>>>> 170550e (init: project baseline)
         return [total[0] + income.monthly[0], total[1] + income.monthly[1]];
       }, [0, 0]);
       

@@ -5,6 +5,10 @@ import { Button } from '@/components/ui/button';
 import TrendIndicator from '@/components/TrendIndicator';
 import BestsellerBadge from '@/components/BestsellerBadge';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
+<<<<<<< HEAD
+=======
+import { estimateRoyalty } from '@/lib/royaltyEstimator';
+>>>>>>> 170550e (init: project baseline)
 
 const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty, onShowReviews, onShowLogs, isRefreshing }) => {
   const handleRefresh = (e) => {
@@ -64,7 +68,12 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
 
   const isAvailable = data.stock_status && (data.stock_status.toLowerCase().includes('in stock') || data.stock_status.toLowerCase().includes('disponibile'));
   const sales = calculateSalesFromBsr(data.bsr);
+<<<<<<< HEAD
   const income = calculateIncome(sales, data.royalty);
+=======
+  const effectiveRoyalty = (data.royalty && data.royalty > 0) ? data.royalty : estimateRoyalty(data);
+  const income = calculateIncome(sales, effectiveRoyalty);
+>>>>>>> 170550e (init: project baseline)
 
   const formatIncomeRange = (range) => {
     if (!range || (range[0] === 0 && range[1] === 0)) return '€0.00';
@@ -72,6 +81,11 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
     return `€${range[0].toFixed(2)} - €${range[1].toFixed(2)}`;
   };
 
+<<<<<<< HEAD
+=======
+  // (Per-ASIN notification removed for a steadier layout)
+
+>>>>>>> 170550e (init: project baseline)
   return (
     <motion.div
       layout
@@ -121,7 +135,11 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
         <div className="col-span-6 sm:col-span-2 flex items-center gap-2 text-sm">
           <BarChart2 className="w-4 h-4 text-accent flex-shrink-0" />
            <div className="flex items-center gap-1">
+<<<<<<< HEAD
             <span className="font-semibold text-foreground whitespace-nowrap">{data.royalty > 0 ? formatIncomeRange(income.monthly) : 'N/A'}</span>
+=======
+            <span className="font-semibold text-foreground whitespace-nowrap">{formatIncomeRange(income.monthly)}</span>
+>>>>>>> 170550e (init: project baseline)
             <TrendIndicator trend={trend?.income} />
           </div>
         </div>
