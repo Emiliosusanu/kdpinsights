@@ -10,10 +10,7 @@ import { Helmet } from 'react-helmet';
 import AsinCard from '@/components/AsinCard';
 import AsinListItem from '@/components/AsinListItem';
 import AsinTrendChart from '@/components/AsinTrendChart';
-<<<<<<< HEAD
-=======
 import PayoutWidget from '@/components/PayoutWidget';
->>>>>>> 170550e (init: project baseline)
 import RoyaltyEditModal from '@/components/RoyaltyEditModal';
 import AsinReviewsModal from '@/components/AsinReviewsModal';
 import AsinEventLogModal from '@/components/AsinEventLogModal';
@@ -248,15 +245,7 @@ useEffect(() => {
   };
 }, [user?.id, fetchTrackedAsins, refreshTrends]);
 
-<<<<<<< HEAD
-useEffect(() => {
-  if (!user) return;
-  const id = setInterval(fetchTrackedAsins, 30000);
-  return () => clearInterval(id);
-}, [user?.id, fetchTrackedAsins])
-=======
 // Removed periodic polling to keep the layout steady; rely on realtime updates and manual refresh
->>>>>>> 170550e (init: project baseline)
 
   const filteredAndSortedAsins = useMemo(() => {
     let sortedAsins = [...trackedAsins];
@@ -342,15 +331,11 @@ const handleRefreshAll = async () => {
 
   const handleDelete = async () => {
     if (!asinToDelete) return;
-<<<<<<< HEAD
-    await deleteAsinAndHistory(asinToDelete);
-=======
     const ok = await deleteAsinAndHistory(asinToDelete);
     if (ok) {
       // Optimistically update UI without waiting for realtime event
       setTrackedAsins(curr => curr.filter(a => a.id !== asinToDelete.id));
     }
->>>>>>> 170550e (init: project baseline)
     setIsDeleteDialogOpen(false);
     setAsinToDelete(null);
   };
@@ -365,12 +350,7 @@ const handleRefreshAll = async () => {
         <title>Monitoraggio ASIN - KDP Insights Pro</title>
         <meta name="description" content="Aggiungi e monitora i tuoi ASIN Amazon in tempo reale." />
       </Helmet>
-<<<<<<< HEAD
-      <div className="container mx-auto pb-20 lg:pb-0">
-        <AsinForm isAdding={isAdding} onAdd={handleAddAsin} />
-=======
       <div className="container mx-auto pb-24 lg:pb-8">
->>>>>>> 170550e (init: project baseline)
 
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-foreground">I tuoi ASIN ({filteredAndSortedAsins.length})</h2>
@@ -402,48 +382,6 @@ const handleRefreshAll = async () => {
             <p className="text-muted-foreground mb-6">Inizia ad aggiungere i tuoi prodotti per vederli qui.</p>
           </motion.div>
         ) : viewMode === 'grid' ? (
-<<<<<<< HEAD
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-            <AnimatePresence>
-              {filteredAndSortedAsins.map((item) => (
-                <motion.div key={item.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
-                  <AsinCard 
-                    data={item} 
-                    trend={trends[item.id]}
-                    onRefresh={handleRefreshSingle}
-                    onDelete={confirmDelete}
-                    onShowChart={() => setSelectedAsinForChart(item)}
-                    onEditRoyalty={() => setSelectedAsinForRoyalty(item)}
-                    onShowReviews={() => setSelectedAsinForReviews(item)}
-                    onShowLogs={() => setSelectedAsinForLogs(item)}
-                    isRefreshing={refreshingAsin === item.asin}
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        ) : (
-          <div className="glass-card overflow-hidden">
-            <AnimatePresence>
-              {filteredAndSortedAsins.map((item) => (
-                 <motion.div key={item.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
-                    <AsinListItem
-                      data={item}
-                      trend={trends[item.id]}
-                      onRefresh={handleRefreshSingle}
-                      onDelete={confirmDelete}
-                      onShowChart={() => setSelectedAsinForChart(item)}
-                      onEditRoyalty={() => setSelectedAsinForRoyalty(item)}
-                      onShowReviews={() => setSelectedAsinForReviews(item)}
-                      onShowLogs={() => setSelectedAsinForLogs(item)}
-                      isRefreshing={refreshingAsin === item.asin}
-                    />
-                 </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-        )}
-=======
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
             {filteredAndSortedAsins.map((item) => (
               <div key={item.id}>
@@ -487,7 +425,6 @@ const handleRefreshAll = async () => {
         </div>
         {/* Amazon payout forecast widget */}
         <PayoutWidget />
->>>>>>> 170550e (init: project baseline)
       </div>
       <AnimatePresence>
         {selectedAsinForChart && (
