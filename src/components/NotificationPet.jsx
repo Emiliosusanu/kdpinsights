@@ -92,6 +92,10 @@ const NotificationPet = () => {
   const target = new Date(y, m - 2, 1);
   const targetKey = `${target.getFullYear()}-${pad2(target.getMonth()+1)}`;
   const [payoutTotal, setPayoutTotal] = React.useState(null);
+<<<<<<< HEAD
+=======
+  const [showBubble, setShowBubble] = React.useState(false);
+>>>>>>> 420b2b9 (first commit)
   const [quoteIdx, setQuoteIdx] = React.useState(0);
   const quotes = React.useMemo(() => [
     'La costanza batte il talento quando il talento non è costante.',
@@ -220,6 +224,7 @@ const NotificationPet = () => {
     return () => clearInterval(id);
   }, [isPayoutDay, quotes.length]);
 
+<<<<<<< HEAD
   // Rotate talk messages on non-payout days when MTD is available
   React.useEffect(() => {
     if (isPayoutDay) return; // handled by payout-day rotator
@@ -228,6 +233,65 @@ const NotificationPet = () => {
     return () => clearInterval(id);
   }, [isPayoutDay, mtdEUR, talkPool.length]);
 
+=======
+  // Ephemeral message scheduler on regular days: 10–15 random messages/day, 10–15s display, 10–15 min apart
+  const timersRef = React.useRef({ show: null, hide: null });
+  const clearTimers = React.useCallback(() => {
+    if (timersRef.current.show) { clearTimeout(timersRef.current.show); timersRef.current.show = null; }
+    if (timersRef.current.hide) { clearTimeout(timersRef.current.hide); timersRef.current.hide = null; }
+  }, []);
+
+  const scheduleNextMessage = React.useCallback(() => {
+    if (isPayoutDay) return; // payout day handled separately
+    if (mtdEUR == null) return; // need data to talk
+    const todayKey = fmtYMD(new Date());
+    let count = 0;
+    try { count = Number(localStorage.getItem(`petMsgCount:${todayKey}`)) || 0; } catch (_) {}
+    if (count >= 15) return; // daily cap
+    const delay = 600000 + Math.floor(Math.random() * 300000); // 10–15 min
+    timersRef.current.show = setTimeout(() => {
+      // pick a random message index, avoid immediate repeat
+      setQuoteIdx((prev) => {
+        if (talkPool.length <= 1) return 0;
+        let idx = Math.floor(Math.random() * talkPool.length);
+        if (idx === prev) idx = (idx + 1) % talkPool.length;
+        return idx;
+      });
+      setShowBubble(true);
+      try { localStorage.setItem(`petMsgCount:${todayKey}`, String(count + 1)); } catch (_) {}
+      const displayMs = 10000 + Math.floor(Math.random() * 5000); // 10–15s
+      timersRef.current.hide = setTimeout(() => {
+        setShowBubble(false);
+        scheduleNextMessage(); // chain
+      }, displayMs);
+    }, delay);
+  }, [isPayoutDay, mtdEUR, talkPool.length]);
+
+  // Kick off scheduler when MTD becomes available and not payout day
+  React.useEffect(() => {
+    if (isPayoutDay) { clearTimers(); setShowBubble(false); return; }
+    if (mtdEUR == null) return;
+    // initial gentle delay (3–6s) before first message
+    const initialDelay = 3000 + Math.floor(Math.random() * 3000);
+    timersRef.current.show = setTimeout(() => {
+      // immediate show first message, then schedule next
+      setQuoteIdx((prev) => (prev + 1) % (talkPool.length || 1));
+      setShowBubble(true);
+      const todayKey = fmtYMD(new Date());
+      try {
+        const c = Number(localStorage.getItem(`petMsgCount:${todayKey}`)) || 0;
+        localStorage.setItem(`petMsgCount:${todayKey}`, String(Math.min(15, c + 1)));
+      } catch (_) {}
+      const displayMs = 10000 + Math.floor(Math.random() * 5000);
+      timersRef.current.hide = setTimeout(() => {
+        setShowBubble(false);
+        scheduleNextMessage();
+      }, displayMs);
+    }, initialDelay);
+    return () => clearTimers();
+  }, [isPayoutDay, mtdEUR, talkPool.length, scheduleNextMessage, clearTimers]);
+
+>>>>>>> 420b2b9 (first commit)
   // Show pet on payout day or when MTD message is available even without new notifications
   if (!shouldShow && !isPayoutDay && mtdEUR == null) return null;
 
@@ -235,8 +299,15 @@ const NotificationPet = () => {
     <div className="fixed right-4 bottom-24 lg:bottom-8 z-50">
       <style>{`
         @keyframes petDance { 0% { transform: translateY(0) rotate(0deg);} 25% { transform: translateY(-2px) rotate(3deg);} 50% { transform: translateY(0) rotate(0deg);} 75% { transform: translateY(-2px) rotate(-3deg);} 100% { transform: translateY(0) rotate(0deg);} }
+<<<<<<< HEAD
       `}</style>
       <div className={`relative ${isPayoutDay ? '[animation:petDance_1.8s_ease-in-out_infinite] transform-gpu' : ''}`} style={isPayoutDay ? { willChange: 'transform' } : undefined}>
+=======
+        @keyframes petBreathe { 0% { transform: translateY(0) rotate(0deg);} 50% { transform: translateY(-1px) rotate(0.4deg);} 100% { transform: translateY(0) rotate(0deg);} }
+        @media (prefers-reduced-motion: reduce) { .pet-anim { animation: none !important; } }
+      `}</style>
+      <div className={`relative pet-anim ${isPayoutDay ? '[animation:petDance_1.8s_ease-in-out_infinite]' : '[animation:petBreathe_8s_ease-in-out_infinite]'} transform-gpu`} style={{ willChange: 'transform' }}>
+>>>>>>> 420b2b9 (first commit)
         <GlobalNotificationsBell />
         {isPayoutDay ? (
           <div className="absolute -top-3 right-14 w-72 bg-slate-900 text-slate-100 border border-slate-700 rounded-xl p-3 shadow-xl">
@@ -245,7 +316,11 @@ const NotificationPet = () => {
             <p className="text-sm mt-1">Totale: <span className="text-emerald-400 font-bold">{payoutTotal != null ? fmtEUR(payoutTotal) : '—'}</span></p>
             <p className="text-xs text-slate-300 mt-2 italic">“{quotes[quoteIdx]}”</p>
           </div>
+<<<<<<< HEAD
         ) : (
+=======
+        ) : (showBubble && mtdEUR != null) ? (
+>>>>>>> 420b2b9 (first commit)
           <div className="absolute -top-3 right-14 w-72 bg-slate-900 text-slate-100 border border-slate-700 rounded-xl p-3 shadow-xl">
             <p className="text-xs text-slate-300">Progresso del mese</p>
             <p className="text-sm mt-1">Fino ad oggi: <span className="text-emerald-400 font-bold">{mtdEUR != null ? fmtEUR(mtdEUR) : '—'}</span></p>
@@ -259,10 +334,19 @@ const NotificationPet = () => {
               return <p className="text-xs text-slate-300 mt-2 italic">“{msg}”</p>;
             })()}
           </div>
+<<<<<<< HEAD
         )}
       </div>
     </div>
   );
 };
+=======
+        ) : null}
+      </div>
+    </div>
+  );
+}
+;
+>>>>>>> 420b2b9 (first commit)
 
 export default NotificationPet;

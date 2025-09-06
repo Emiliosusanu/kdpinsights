@@ -79,8 +79,18 @@ const PayoutWidget = () => {
             const start = fmtYMD(s.from);
             const end = fmtYMD(new Date(s.to.getFullYear(), s.to.getMonth(), s.to.getDate()-1)); // inclusive last day of month
             const symbols = allCurrencies.join(',');
+<<<<<<< HEAD
             const url = `https://api.exchangerate.host/timeseries?base=EUR&start_date=${start}&end_date=${end}&symbols=${encodeURIComponent(symbols)}`;
             const res = await fetch(url);
+=======
+            const baseUrl = import.meta.env.PROD ? '/api/fx-timeseries' : 'https://api.exchangerate.host/timeseries';
+            const params = new URLSearchParams({ base: 'EUR', start_date: start, end_date: end, symbols });
+            let res = await fetch(`${baseUrl}?${params.toString()}`);
+            if (!res.ok && import.meta.env.PROD) {
+              // Fallback to direct API if serverless proxy fails
+              res = await fetch(`https://api.exchangerate.host/timeseries?${params.toString()}`);
+            }
+>>>>>>> 420b2b9 (first commit)
             const json = await res.json();
             if (json && json.rates) {
               const sums = {}; const counts = {};

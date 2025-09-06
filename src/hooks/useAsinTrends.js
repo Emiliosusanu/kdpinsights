@@ -2,9 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/customSupabaseClient';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { estimateRoyalty } from '@/lib/royaltyEstimator';
 >>>>>>> 170550e (init: project baseline)
+=======
+import { estimateRoyalty } from '@/lib/royaltyEstimator';
+>>>>>>> 420b2b9 (first commit)
 
 const calculateTrend = (current, previous, lowerIsBetter = false) => {
   if (previous === null || current === null || previous === 0 || current === previous) {
@@ -53,6 +57,7 @@ const useAsinTrends = (asins) => {
 
     const newTrends = {};
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     for (const asin of asins) {
       const relevantHistory = historyData
@@ -62,6 +67,8 @@ const useAsinTrends = (asins) => {
       if (relevantHistory.length < 2) {
         newTrends[asin.id] = { bsr: 'stable', reviews: 'stable', income: 'stable', price: 'stable' };
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
     // Group history by ASIN for deeper analysis (summary and MoM guard)
     const historyByAsin = (historyData || []).reduce((acc, h) => {
       (acc[h.asin_data_id] = acc[h.asin_data_id] || []).push(h);
@@ -74,7 +81,10 @@ const useAsinTrends = (asins) => {
 
       if (relevantHistory.length < 2) {
         newTrends[asin.id] = { bsr: 'stable', reviews: 'stable', income: 'stable', price: 'stable', acos: 'stable' };
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
         continue;
       }
 
@@ -87,12 +97,15 @@ const useAsinTrends = (asins) => {
 
       const currentSales = calculateSalesFromBsr(current.bsr);
 <<<<<<< HEAD
+<<<<<<< HEAD
       const currentIncome = calculateIncome(currentSales, asin.royalty);
       const currentAvgIncome = (currentIncome.monthly[0] + currentIncome.monthly[1]) / 2;
 
       const previousSales = calculateSalesFromBsr(previous.bsr);
       const previousIncome = calculateIncome(previousSales, asin.royalty);
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
       const effectiveRoyalty = (asin.royalty && asin.royalty > 0) ? asin.royalty : estimateRoyalty(asin);
       const currentIncome = calculateIncome(currentSales, effectiveRoyalty);
       const currentAvgIncome = (currentIncome.monthly[0] + currentIncome.monthly[1]) / 2;
@@ -103,13 +116,19 @@ const useAsinTrends = (asins) => {
         ? asin.royalty
         : estimateRoyalty({ ...asin, price: (previous.price ?? asin.price) });
       const previousIncome = calculateIncome(previousSales, effRoyaltyPrev);
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
       const previousAvgIncome = (previousIncome.monthly[0] + previousIncome.monthly[1]) / 2;
 
       const incomeTrend = calculateTrend(currentAvgIncome, previousAvgIncome);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
       // Break-even ACOS = (royalty / price) * 100
       const currentBE = (effectiveRoyalty && current.price) ? (effectiveRoyalty / current.price) * 100 : null;
       const previousBE = (effectiveRoyalty && previous.price) ? (effectiveRoyalty / previous.price) * 100 : null;
@@ -238,14 +257,20 @@ const useAsinTrends = (asins) => {
         drivers.push(priceDeltaPct > 0 ? 'Prezzo medio più alto' : 'Prezzo medio più basso');
       }
 
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
       newTrends[asin.id] = {
         bsr: bsrTrend,
         reviews: reviewsTrend,
         income: incomeTrend,
         price: priceTrend,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
         acos: acosTrend,
         summary: {
           items: summaryItems,
@@ -268,13 +293,19 @@ const useAsinTrends = (asins) => {
             samples: { prev: period1.length, curr: period2.length },
           },
         },
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
       };
     }
 
     setTrends(newTrends);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
     // Persist global notifications for top bell
     try {
       const entries = Object.entries(newTrends);
@@ -319,7 +350,10 @@ const useAsinTrends = (asins) => {
       localStorage.setItem('globalNotifications', JSON.stringify(payload));
       try { window.dispatchEvent(new Event('globalNotificationsUpdated')); } catch (_) {}
     } catch (_) {}
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
     setIsLoading(false);
   }, [asins.map(a => a.id).join(',')]); // Depend on string of IDs
 

@@ -6,9 +6,13 @@ import TrendIndicator from '@/components/TrendIndicator';
 import BestsellerBadge from '@/components/BestsellerBadge';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { estimateRoyalty } from '@/lib/royaltyEstimator';
 >>>>>>> 170550e (init: project baseline)
+=======
+import { estimateRoyalty } from '@/lib/royaltyEstimator';
+>>>>>>> 420b2b9 (first commit)
 
 const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty, onShowReviews, onShowLogs, isRefreshing }) => {
   const handleRefresh = (e) => {
@@ -69,11 +73,16 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
   const isAvailable = data.stock_status && (data.stock_status.toLowerCase().includes('in stock') || data.stock_status.toLowerCase().includes('disponibile'));
   const sales = calculateSalesFromBsr(data.bsr);
 <<<<<<< HEAD
+<<<<<<< HEAD
   const income = calculateIncome(sales, data.royalty);
 =======
   const effectiveRoyalty = (data.royalty && data.royalty > 0) ? data.royalty : estimateRoyalty(data);
   const income = calculateIncome(sales, effectiveRoyalty);
 >>>>>>> 170550e (init: project baseline)
+=======
+  const effectiveRoyalty = (data.royalty && data.royalty > 0) ? data.royalty : estimateRoyalty(data);
+  const income = calculateIncome(sales, effectiveRoyalty);
+>>>>>>> 420b2b9 (first commit)
 
   const formatIncomeRange = (range) => {
     if (!range || (range[0] === 0 && range[1] === 0)) return '€0.00';
@@ -82,10 +91,15 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   // (Per-ASIN notification removed for a steadier layout)
 
 >>>>>>> 170550e (init: project baseline)
+=======
+  // (Per-ASIN notification removed for a steadier layout)
+
+>>>>>>> 420b2b9 (first commit)
   return (
     <motion.div
       layout
@@ -136,10 +150,14 @@ const AsinListItem = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoy
           <BarChart2 className="w-4 h-4 text-accent flex-shrink-0" />
            <div className="flex items-center gap-1">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <span className="font-semibold text-foreground whitespace-nowrap">{data.royalty > 0 ? formatIncomeRange(income.monthly) : 'N/A'}</span>
 =======
             <span className="font-semibold text-foreground whitespace-nowrap">{formatIncomeRange(income.monthly)}</span>
 >>>>>>> 170550e (init: project baseline)
+=======
+            <span className="font-semibold text-foreground whitespace-nowrap">{formatIncomeRange(income.monthly)}</span>
+>>>>>>> 420b2b9 (first commit)
             <TrendIndicator trend={trend?.income} />
           </div>
         </div>

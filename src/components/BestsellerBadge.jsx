@@ -1,5 +1,6 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
@@ -22,6 +23,8 @@ const BestsellerBadge = ({ small = false }) => (
   </motion.div>
 );
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 import { Star } from 'lucide-react';
 
 const BestsellerBadge = ({ small = false }) => {
@@ -47,6 +50,9 @@ const BestsellerBadge = ({ small = false }) => {
     </div>
   );
 };
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
 export default BestsellerBadge;

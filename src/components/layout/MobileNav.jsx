@@ -5,7 +5,10 @@ import { motion } from 'framer-motion';
 
 const MobileNav = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   const [hidden, setHidden] = React.useState(false);
   const lastYRef = React.useRef(typeof window !== 'undefined' ? window.scrollY : 0);
   const tickingRef = React.useRef(false);
@@ -30,7 +33,10 @@ const MobileNav = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
   const navItems = [
     { to: '/', icon: Target, label: 'Monitor' },
     { to: '/bsr-performance', icon: BarChart3, label: 'Performance' },
@@ -42,10 +48,14 @@ const MobileNav = () => {
     <motion.div 
       initial={{ y: 100 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
       animate={{ y: 0 }}
 =======
       animate={{ y: hidden ? 100 : 0 }}
 >>>>>>> 170550e (init: project baseline)
+=======
+      animate={{ y: hidden ? 100 : 0 }}
+>>>>>>> 420b2b9 (first commit)
       transition={{ type: 'spring', stiffness: 120, damping: 20 }}
       className="lg:hidden fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-xl border-t border-border z-50"
     >

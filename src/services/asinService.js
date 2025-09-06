@@ -12,10 +12,14 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function runScrapeWithRetry(
 	{ asin, country, userId },
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ retries = 3, baseDelay = 700 } = {}
 =======
 	{ retries = 3, baseDelay = 900 } = {}
 >>>>>>> 170550e (init: project baseline)
+=======
+	{ retries = 3, baseDelay = 900 } = {}
+>>>>>>> 420b2b9 (first commit)
 ) {
 	let lastErr;
 	for (let attempt = 1; attempt <= retries; attempt++) {
@@ -85,10 +89,14 @@ export const scrapeAndProcessAsin = async (asinToScrape, countryCode, user) => {
  */
 export async function processAllAsins(
 <<<<<<< HEAD
+<<<<<<< HEAD
 	{ items, userId, max = 5, pauseMs = 900, baseDelay = 700, retries = 3 },
 =======
 	{ items, userId, max = 3, pauseMs = 1000, baseDelay = 900, retries = 3 },
 >>>>>>> 170550e (init: project baseline)
+=======
+	{ items, userId, max = 3, pauseMs = 1000, baseDelay = 900, retries = 3 },
+>>>>>>> 420b2b9 (first commit)
 	onProgress
 ) {
 	const results = [];
@@ -113,10 +121,14 @@ export async function processAllAsins(
 		results.push(...chunkResults);
 		// pausa tra batch per non sparare burst
 <<<<<<< HEAD
+<<<<<<< HEAD
 		await sleep(pauseMs + Math.floor(Math.random() * 400));
 =======
 		await sleep(pauseMs + Math.floor(Math.random() * 450));
 >>>>>>> 170550e (init: project baseline)
+=======
+		await sleep(pauseMs + Math.floor(Math.random() * 450));
+>>>>>>> 420b2b9 (first commit)
 	}
 	return results;
 }

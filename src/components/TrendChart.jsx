@@ -15,11 +15,14 @@ const TrendChart = ({ book, detailed = false }) => {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   const maxBSR = Math.max(...book.trendData.map(d => d.bsr));
   const minBSR = Math.min(...book.trendData.map(d => d.bsr));
   const maxReviews = Math.max(...book.trendData.map(d => d.reviews));
   const minReviews = Math.min(...book.trendData.map(d => d.reviews));
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   // Forward-fill null/0 values from previous day to avoid dips to 0/null
   const trendData = (() => {
     const out = [];
@@ -51,12 +54,16 @@ const TrendChart = ({ book, detailed = false }) => {
   const minReviews = reviewVals.length ? Math.min(...reviewVals) : 0;
   const bsrRange = Math.max(1, maxBSR - minBSR);
   const reviewsRange = Math.max(1, maxReviews - minReviews);
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
   const chartHeight = detailed ? 300 : 200;
   const chartWidth = 800;
 
   // Calculate trend direction
+<<<<<<< HEAD
 <<<<<<< HEAD
   const recentBSR = book.trendData.slice(-7).map(d => d.bsr);
   const avgRecentBSR = recentBSR.reduce((a, b) => a + b, 0) / recentBSR.length;
@@ -64,12 +71,17 @@ const TrendChart = ({ book, detailed = false }) => {
   const avgOlderBSR = olderBSR.reduce((a, b) => a + b, 0) / olderBSR.length;
   const bsrTrend = avgRecentBSR < avgOlderBSR ? 'improving' : 'declining';
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   const recentBSR = trendData.slice(-7).map(d => d.bsr).filter(v => Number.isFinite(v));
   const avgRecentBSR = recentBSR.length ? recentBSR.reduce((a, b) => a + b, 0) / recentBSR.length : NaN;
   const olderBSR = trendData.slice(-14, -7).map(d => d.bsr).filter(v => Number.isFinite(v));
   const avgOlderBSR = olderBSR.length ? olderBSR.reduce((a, b) => a + b, 0) / olderBSR.length : NaN;
   const bsrTrend = (isNaN(avgRecentBSR) || isNaN(avgOlderBSR)) ? 'improving' : (avgRecentBSR < avgOlderBSR ? 'improving' : 'declining');
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
   return (
     <motion.div
@@ -167,6 +179,7 @@ const TrendChart = ({ book, detailed = false }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
 <<<<<<< HEAD
+<<<<<<< HEAD
               points={book.trendData.map((point, index) => {
                 const x = (index / (book.trendData.length - 1)) * (chartWidth - 40) + 20;
                 const y = chartHeight - 20 - ((point.bsr - minBSR) / (maxBSR - minBSR)) * (chartHeight - 40);
@@ -175,6 +188,11 @@ const TrendChart = ({ book, detailed = false }) => {
                 const x = (index / Math.max(1, (trendData.length - 1))) * (chartWidth - 40) + 20;
                 const y = chartHeight - 20 - ((point.bsr - minBSR) / bsrRange) * (chartHeight - 40);
 >>>>>>> 170550e (init: project baseline)
+=======
+              points={trendData.map((point, index) => {
+                const x = (index / Math.max(1, (trendData.length - 1))) * (chartWidth - 40) + 20;
+                const y = chartHeight - 20 - ((point.bsr - minBSR) / bsrRange) * (chartHeight - 40);
+>>>>>>> 420b2b9 (first commit)
                 return `${x},${y}`;
               }).join(' ')}
             />
@@ -187,6 +205,7 @@ const TrendChart = ({ book, detailed = false }) => {
               strokeLinecap="round"
               strokeLinejoin="round"
 <<<<<<< HEAD
+<<<<<<< HEAD
               points={book.trendData.map((point, index) => {
                 const x = (index / (book.trendData.length - 1)) * (chartWidth - 40) + 20;
                 const y = chartHeight - 20 - ((point.reviews - minReviews) / (maxReviews - minReviews)) * (chartHeight - 40);
@@ -195,11 +214,17 @@ const TrendChart = ({ book, detailed = false }) => {
                 const x = (index / Math.max(1, (trendData.length - 1))) * (chartWidth - 40) + 20;
                 const y = chartHeight - 20 - ((point.reviews - minReviews) / reviewsRange) * (chartHeight - 40);
 >>>>>>> 170550e (init: project baseline)
+=======
+              points={trendData.map((point, index) => {
+                const x = (index / Math.max(1, (trendData.length - 1))) * (chartWidth - 40) + 20;
+                const y = chartHeight - 20 - ((point.reviews - minReviews) / reviewsRange) * (chartHeight - 40);
+>>>>>>> 420b2b9 (first commit)
                 return `${x},${y}`;
               }).join(' ')}
             />
             
             {/* Data points */}
+<<<<<<< HEAD
 <<<<<<< HEAD
             {book.trendData.map((point, index) => {
               if (index % 5 === 0 || index === book.trendData.length - 1) {
@@ -207,12 +232,17 @@ const TrendChart = ({ book, detailed = false }) => {
                 const bsrY = chartHeight - 20 - ((point.bsr - minBSR) / (maxBSR - minBSR)) * (chartHeight - 40);
                 const reviewY = chartHeight - 20 - ((point.reviews - minReviews) / (maxReviews - minReviews)) * (chartHeight - 40);
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
             {trendData.map((point, index) => {
               if (index % 5 === 0 || index === book.trendData.length - 1) {
                 const x = (index / Math.max(1, (trendData.length - 1))) * (chartWidth - 40) + 20;
                 const bsrY = chartHeight - 20 - ((point.bsr - minBSR) / bsrRange) * (chartHeight - 40);
                 const reviewY = chartHeight - 20 - ((point.reviews - minReviews) / reviewsRange) * (chartHeight - 40);
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
                 
                 return (
                   <g key={index}>
@@ -235,16 +265,22 @@ const TrendChart = ({ book, detailed = false }) => {
             {/* X-axis labels */}
             <text x="20" y={chartHeight + 20} fill="rgba(255,255,255,0.7)" fontSize="12" textAnchor="start">
 <<<<<<< HEAD
+<<<<<<< HEAD
               {book.trendData[0]?.date}
             </text>
             <text x={chartWidth - 20} y={chartHeight + 20} fill="rgba(255,255,255,0.7)" fontSize="12" textAnchor="end">
               {book.trendData[book.trendData.length - 1]?.date}
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
               {trendData[0]?.date}
             </text>
             <text x={chartWidth - 20} y={chartHeight + 20} fill="rgba(255,255,255,0.7)" fontSize="12" textAnchor="end">
               {trendData[trendData.length - 1]?.date}
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
             </text>
           </svg>
         </div>

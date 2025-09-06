@@ -5,6 +5,7 @@ export function cn(...inputs) {
 	return twMerge(clsx(inputs));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // add or export with your other utils
 export function availabilityColor(code) {
@@ -20,6 +21,8 @@ export function availabilityColor(code) {
   }
 }
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 // add or export with your other utils
 export function availabilityColor(code) {
 	switch ((code || '').toUpperCase()) {
@@ -33,5 +36,9 @@ export function availabilityColor(code) {
 	  default:             return 'text-zinc-300';
 	}
   }
+<<<<<<< HEAD
   
 >>>>>>> 170550e (init: project baseline)
+=======
+  
+>>>>>>> 420b2b9 (first commit)

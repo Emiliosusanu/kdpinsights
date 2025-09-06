@@ -194,7 +194,11 @@ export default defineConfig({
 	plugins: [
 		...(isDev ? [inlineEditPlugin(), editModeDevPlugin()] : []),
 		react(),
+<<<<<<< HEAD
 		addTransformIndexHtml
+=======
+		...(isDev ? [addTransformIndexHtml] : [])
+>>>>>>> 420b2b9 (first commit)
 	],
 	server: {
 		cors: true,

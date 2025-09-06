@@ -1,5 +1,6 @@
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { motion } from 'framer-motion';
 import { Star, TrendingUp, DollarSign, RefreshCcw, Trash2, Loader2, LineChart, Edit, BarChart2, Clock, BookOpen, Calendar, MessageCircle, PackageCheck, PackageX, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +8,8 @@ import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
 import TrendIndicator from '@/components/TrendIndicator';
 import BestsellerBadge from '@/components/BestsellerBadge';
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 import { Star, TrendingUp, DollarSign, RefreshCcw, Trash2, Loader2, LineChart, Edit, BarChart2, Clock, BookOpen, Calendar, MessageCircle, PackageCheck, PackageX, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
@@ -15,7 +18,10 @@ import TrendIndicator from '@/components/TrendIndicator';
 import BestsellerBadge from '@/components/BestsellerBadge';
 import AsinAcosGuideModal from '@/components/AsinAcosGuideModal';
 import CircularProgress from '@/components/ui/CircularProgress';
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
 const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty, onShowReviews, onShowLogs, isRefreshing }) => {
   const handleRefresh = (e) => {
@@ -56,6 +62,7 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
 
   const sales = calculateSalesFromBsr(data.bsr);
 <<<<<<< HEAD
+<<<<<<< HEAD
   const income = calculateIncome(sales, data.royalty);
 
   const formatIncomeRange = (range) => {
@@ -64,6 +71,8 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
     }
     return `€${range[0].toFixed(2)} - €${range[1].toFixed(2)}`;
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   const effectiveRoyalty = (data.royalty && data.royalty > 0) ? data.royalty : estimateRoyalty(data);
   const income = calculateIncome(sales, effectiveRoyalty);
 
@@ -72,7 +81,10 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
       return `$${range[0].toFixed(2)}`;
     }
     return `$${range[0].toFixed(2)} - $${range[1].toFixed(2)}`;
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
   };
   
   const formatTimeAgo = (dateString) => {
@@ -99,16 +111,22 @@ const AsinCard = ({ data, trend, onRefresh, onDelete, onShowChart, onEditRoyalty
   };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   // (Per-ASIN notification removed for a steadier layout)
 
 >>>>>>> 170550e (init: project baseline)
+=======
+  // (Per-ASIN notification removed for a steadier layout)
+
+>>>>>>> 420b2b9 (first commit)
 // use backend availability_code
 const availability = (data.availability_code || '').toUpperCase();
 const inStock = availability === 'IN_STOCK';
 const availabilityClass = inStock ? 'text-green-400' : 'text-red-400';
 const AvailabilityIcon = inStock ? PackageCheck : PackageX;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   return (
     <motion.div
@@ -122,6 +140,8 @@ const AvailabilityIcon = inStock ? PackageCheck : PackageX;
              {data.is_bestseller && <BestsellerBadge />}
              <img className="w-full h-full object-cover rounded-md shadow-md transition-transform duration-300 group-hover:scale-105" alt={`Copertina di ${data.title}`} src={imageUrl} />
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 // break-even ACOS calculation
 // breakEvenAcos = (royalty / price) * 100
 const breakEvenAcos = (data.price > 0 && effectiveRoyalty > 0) ? (effectiveRoyalty / data.price) * 100 : null;
@@ -237,7 +257,10 @@ React.useEffect(() => {
                />
              )}
              <img className="w-full h-full object-cover shadow-md transform-gpu transition duration-200 md:group-hover/cover:brightness-110 md:group-hover/cover:shadow-[0_0_18px_rgba(255,255,255,0.25)]" alt={`Copertina di ${data.title}`} src={imageUrl} loading="lazy" decoding="async" />
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
           </div>
         </a>
         <div className="flex-1">
@@ -258,10 +281,14 @@ React.useEffect(() => {
             <div>
               <p className="text-muted-foreground">Prezzo</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <p className="font-semibold text-foreground">{data.price > 0 ? `€${data.price.toFixed(2)}` : '—'}</p>
 =======
               <p className="font-semibold text-foreground">{data.price > 0 ? `$${data.price.toFixed(2)}` : '—'}</p>
 >>>>>>> 170550e (init: project baseline)
+=======
+              <p className="font-semibold text-foreground">{data.price > 0 ? `$${data.price.toFixed(2)}` : '—'}</p>
+>>>>>>> 420b2b9 (first commit)
             </div>
           </div>
            <TrendIndicator trend={trend?.price} />
@@ -277,6 +304,7 @@ React.useEffect(() => {
           <TrendIndicator trend={trend?.bsr} />
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div className="flex items-center justify-between gap-2 bg-muted/50 p-2 rounded-lg col-span-2">
           <div className="flex items-center gap-2">
             <Star className="w-4 h-4 text-yellow-400" />
@@ -287,6 +315,8 @@ React.useEffect(() => {
           </div>
           <TrendIndicator trend={trend?.reviews} />
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
         <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg col-span-2">
           <Star className="w-4 h-4 text-yellow-400" />
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:gap-4 w-full">
@@ -324,7 +354,10 @@ React.useEffect(() => {
               <TrendIndicator trend={trend?.acos} small />
             </div>
           </div>
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
         </div>
         
         {data.page_count > 0 && (
@@ -353,10 +386,14 @@ React.useEffect(() => {
             <div>
               <p className="text-muted-foreground">Guadagno Stimato (Mese)</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <p className="font-semibold text-foreground">{data.royalty > 0 ? formatIncomeRange(income.monthly) : 'Imposta royalty'}</p>
 =======
               <p className="font-semibold text-foreground">{formatIncomeRange(income.monthly)}</p>
 >>>>>>> 170550e (init: project baseline)
+=======
+              <p className="font-semibold text-foreground">{formatIncomeRange(income.monthly)}</p>
+>>>>>>> 420b2b9 (first commit)
             </div>
           </div>
           <TrendIndicator trend={trend?.income} />
@@ -390,12 +427,15 @@ React.useEffect(() => {
         </div>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
     </motion.div>
   );
 };
 
 export default AsinCard;
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
       <AsinAcosGuideModal
         asinData={data}
         breakEvenAcos={breakEvenAcos}
@@ -406,5 +446,9 @@ export default AsinCard;
   );
 };
 
+<<<<<<< HEAD
 export default AsinCard;
 >>>>>>> 170550e (init: project baseline)
+=======
+export default AsinCard;
+>>>>>>> 420b2b9 (first commit)

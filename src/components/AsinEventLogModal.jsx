@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/customSupabaseClient';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Loader2, X, History, ShoppingCart, Star, BarChart, AlertTriangle, PlusCircle } from 'lucide-react';
 =======
 import { Loader2, X, History, ShoppingCart, Star, BarChart, AlertTriangle, PlusCircle, TrendingDown, TrendingUp } from 'lucide-react';
 >>>>>>> 170550e (init: project baseline)
+=======
+import { Loader2, X, History, ShoppingCart, Star, BarChart, AlertTriangle, PlusCircle, TrendingDown, TrendingUp } from 'lucide-react';
+>>>>>>> 420b2b9 (first commit)
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 
@@ -19,7 +23,10 @@ const eventIcons = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 const formatNumber = (num) => {
   if (num === null || num === undefined || Number.isNaN(Number(num))) return '—';
   return new Intl.NumberFormat('it-IT').format(Number(num));
@@ -57,7 +64,10 @@ const BsrChangeRow = ({ event }) => {
   );
 };
 
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 const AsinEventLogModal = ({ asinData, isOpen, onClose }) => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -111,11 +121,14 @@ const AsinEventLogModal = ({ asinData, isOpen, onClose }) => {
                     {getEventIcon(event.event_type)}
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <div className="pl-4">
                     <p className="font-semibold text-foreground">{event.description}</p>
                     <p className="text-xs text-muted-foreground">{new Date(event.created_at).toLocaleString('it-IT')}</p>
                   </div>
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
                   {event.event_type === 'BSR_CHANGED' ? (
                     <BsrChangeRow event={event} />
                   ) : (
@@ -124,7 +137,10 @@ const AsinEventLogModal = ({ asinData, isOpen, onClose }) => {
                       <p className="text-xs text-muted-foreground">{new Date(event.created_at).toLocaleString('it-IT')}</p>
                     </div>
                   )}
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
                 </div>
               ))}
             </div>

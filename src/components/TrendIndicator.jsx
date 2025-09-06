@@ -18,6 +18,7 @@ const trendConfig = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const TrendIndicator = ({ trend }) => {
   if (!trend || !trendConfig[trend]) {
     return <div className="w-4 h-4" />; // Placeholder for alignment
@@ -25,6 +26,8 @@ const TrendIndicator = ({ trend }) => {
 
   const { Icon, color } = trendConfig[trend];
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 const TrendIndicator = ({ trend, small = false }) => {
   if (!trend || !trendConfig[trend]) {
     return <div className={small ? "w-4 h-4" : "w-5 h-5"} />; // Placeholder for alignment
@@ -32,7 +35,10 @@ const TrendIndicator = ({ trend, small = false }) => {
 
   const { Icon, color } = trendConfig[trend];
   const sizeCls = small ? 'w-4 h-4' : 'w-5 h-5';
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
   return (
     <motion.div
@@ -44,10 +50,14 @@ const TrendIndicator = ({ trend, small = false }) => {
       className={`inline-flex items-center ${color}`}
     >
 <<<<<<< HEAD
+<<<<<<< HEAD
       <Icon className="w-5 h-5" />
 =======
       <Icon className={sizeCls} />
 >>>>>>> 170550e (init: project baseline)
+=======
+      <Icon className={sizeCls} />
+>>>>>>> 420b2b9 (first commit)
     </motion.div>
   );
 };

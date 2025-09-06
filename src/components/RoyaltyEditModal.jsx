@@ -15,20 +15,27 @@ import { toast } from '@/components/ui/use-toast';
 import { Loader2, Info, TrendingUp, Calendar, BarChart2 } from 'lucide-react';
 import { calculateSalesFromBsr, calculateIncome } from '@/lib/incomeCalculator';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
   const [royalty, setRoyalty] = useState('');
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
 import { estimateRoyalty, explainRoyalty } from '@/lib/royaltyEstimator';
 
 const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
   const [royalty, setRoyalty] = useState('');
   const [mode, setMode] = useState('auto'); // 'auto' | 'manual'
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (asinData) {
+<<<<<<< HEAD
 <<<<<<< HEAD
       setRoyalty(asinData.royalty || '');
 =======
@@ -36,6 +43,11 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
       setMode(hasManual ? 'manual' : 'auto');
       setRoyalty(hasManual ? asinData.royalty : '');
 >>>>>>> 170550e (init: project baseline)
+=======
+      const hasManual = typeof asinData.royalty === 'number' && asinData.royalty > 0;
+      setMode(hasManual ? 'manual' : 'auto');
+      setRoyalty(hasManual ? asinData.royalty : '');
+>>>>>>> 420b2b9 (first commit)
     }
   }, [asinData]);
 
@@ -43,6 +55,7 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
     if (!asinData) return;
 
     const royaltyValue = parseFloat(royalty.toString().replace(',', '.'));
+<<<<<<< HEAD
 <<<<<<< HEAD
     if (isNaN(royaltyValue) || royaltyValue < 0) {
       toast({
@@ -52,6 +65,8 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
       });
       return;
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
     if (mode === 'manual') {
       if (isNaN(royaltyValue) || royaltyValue < 0) {
         toast({
@@ -61,17 +76,24 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
         });
         return;
       }
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
     }
 
     setIsSaving(true);
     const { data, error } = await supabase
       .from('asin_data')
 <<<<<<< HEAD
+<<<<<<< HEAD
       .update({ royalty: royaltyValue })
 =======
       .update({ royalty: mode === 'auto' ? null : royaltyValue })
 >>>>>>> 170550e (init: project baseline)
+=======
+      .update({ royalty: mode === 'auto' ? null : royaltyValue })
+>>>>>>> 420b2b9 (first commit)
       .eq('id', asinData.id)
       .select()
       .single();
@@ -98,18 +120,24 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
   const sales = calculateSalesFromBsr(asinData.bsr);
   const royaltyValue = parseFloat(royalty.toString().replace(',', '.')) || 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
   const income = calculateIncome(sales, royaltyValue);
 
   const formatRange = (range) => `${range[0]} - ${range[1]}`;
   const formatIncomeRange = (range) => `€${range[0].toFixed(2)} - €${range[1].toFixed(2)}`;
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   const autoInfo = explainRoyalty(asinData);
   const effectiveRoyalty = mode === 'auto' ? autoInfo.netRoyalty : royaltyValue;
   const income = calculateIncome(sales, effectiveRoyalty);
 
   const formatRange = (range) => `${range[0]} - ${range[1]}`;
   const formatIncomeRange = (range) => `$${range[0].toFixed(2)} - $${range[1].toFixed(2)}`;
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -121,6 +149,7 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-6 py-4">
+<<<<<<< HEAD
 <<<<<<< HEAD
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="royalty" className="text-right">
@@ -137,6 +166,8 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
           </div>
 
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
           {/* Mode selector */}
           <div className="flex items-center gap-3">
             <Label className="text-sm">Modalità</Label>
@@ -201,7 +232,10 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
             </div>
           )}
 
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
           <div className="bg-slate-800/50 p-4 rounded-lg border border-white/10 space-y-4">
               <h4 className="text-md font-semibold text-white flex items-center gap-2"><Info className="w-5 h-5 text-cyan-400" /> Stima Guadagni</h4>
               <p className="text-sm text-gray-400">
@@ -219,9 +253,13 @@ const RoyaltyEditModal = ({ asinData, isOpen, onClose, onRoyaltyUpdate }) => {
                       <p className="text-green-400 font-semibold">Giorno: {formatIncomeRange(income.daily)}</p>
                       <p className="text-green-400 font-semibold">Mese: {formatIncomeRange(income.monthly)}</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                       <p className="text-xs text-gray-400 mt-1">Calcolato con royalty {mode === 'auto' ? 'automatica' : 'manuale'}: ${effectiveRoyalty.toFixed(2)}</p>
 >>>>>>> 170550e (init: project baseline)
+=======
+                      <p className="text-xs text-gray-400 mt-1">Calcolato con royalty {mode === 'auto' ? 'automatica' : 'manuale'}: ${effectiveRoyalty.toFixed(2)}</p>
+>>>>>>> 420b2b9 (first commit)
                   </div>
               </div>
               <p className="text-xs text-gray-500 pt-2">

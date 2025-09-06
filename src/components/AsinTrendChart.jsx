@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 =======
 import React, { useState, useEffect, useMemo } from 'react';
 >>>>>>> 170550e (init: project baseline)
+=======
+import React, { useState, useEffect, useMemo } from 'react';
+>>>>>>> 420b2b9 (first commit)
 import { motion, AnimatePresence } from 'framer-motion';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { supabase } from '@/lib/customSupabaseClient';
@@ -11,9 +15,13 @@ import { Button } from '@/components/ui/button';
 import DateRangePicker from '@/components/DateRangePicker';
 import { addDays, format } from 'date-fns';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import useLocalStorage from '@/hooks/useLocalStorage';
 >>>>>>> 170550e (init: project baseline)
+=======
+import useLocalStorage from '@/hooks/useLocalStorage';
+>>>>>>> 420b2b9 (first commit)
 
 const AsinTrendChart = ({ asinData, onClose }) => {
   const [history, setHistory] = useState([]);
@@ -23,9 +31,13 @@ const AsinTrendChart = ({ asinData, onClose }) => {
     to: new Date(),
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   const [normalize, setNormalize] = useLocalStorage('asinTrendChartNormalize', true);
 >>>>>>> 170550e (init: project baseline)
+=======
+  const [normalize, setNormalize] = useLocalStorage('asinTrendChartNormalize', true);
+>>>>>>> 420b2b9 (first commit)
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -51,12 +63,15 @@ const AsinTrendChart = ({ asinData, onClose }) => {
         console.error('Error fetching history:', error);
       } else {
 <<<<<<< HEAD
+<<<<<<< HEAD
         const formattedData = data.map(item => ({
           date: new Date(item.created_at).toLocaleDateString('it-IT', { day: '2-digit', month: 'short' }),
           BSR: item.bsr,
           Recensioni: item.review_count,
         }));
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
         const formattedData = data.map(item => {
           const d = new Date(item.created_at);
           const dateKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -68,7 +83,10 @@ const AsinTrendChart = ({ asinData, onClose }) => {
             Recensioni: Number(item.review_count),
           };
         });
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
         setHistory(formattedData);
       }
       setLoading(false);
@@ -80,7 +98,10 @@ const AsinTrendChart = ({ asinData, onClose }) => {
   }, [asinData, dateRange]);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
   const dataForChart = useMemo(() => {
     if (!normalize) return history;
     const map = new Map();
@@ -130,7 +151,10 @@ const AsinTrendChart = ({ asinData, onClose }) => {
     return normalized;
   }, [history, normalize]);
 
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
   return (
     <AnimatePresence>
       <motion.div
@@ -158,15 +182,21 @@ const AsinTrendChart = ({ asinData, onClose }) => {
           </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className="mb-4">
             <DateRangePicker date={dateRange} setDate={setDateRange} />
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
           <div className="mb-4 flex items-center justify-between">
             <DateRangePicker date={dateRange} setDate={setDateRange} />
             <Button onClick={() => setNormalize(v => !v)} variant={normalize ? 'default' : 'outline'} size="sm" className="border-border text-muted-foreground hover:text-foreground">
               {normalize ? 'Normalizza: ON' : 'Normalizza: OFF'}
             </Button>
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
           </div>
 
           <div className="flex-grow">
@@ -174,6 +204,7 @@ const AsinTrendChart = ({ asinData, onClose }) => {
               <div className="flex items-center justify-center h-full">
                 <Loader2 className="w-12 h-12 text-white animate-spin" />
               </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
             ) : history.length > 1 ? (
               <ResponsiveContainer width="100%" height="100%">
@@ -183,6 +214,11 @@ const AsinTrendChart = ({ asinData, onClose }) => {
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={dataForChart} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
 >>>>>>> 170550e (init: project baseline)
+=======
+            ) : dataForChart.length > 1 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={dataForChart} margin={{ top: 5, right: 20, left: 20, bottom: 5 }}>
+>>>>>>> 420b2b9 (first commit)
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.1)" />
                   <XAxis dataKey="date" stroke="rgba(255, 255, 255, 0.5)" />
                   <YAxis yAxisId="left" stroke="#82ca9d" orientation="left" label={{ value: 'BSR', angle: -90, position: 'insideLeft', fill: '#82ca9d' }} reversed={true} />
@@ -194,13 +230,19 @@ const AsinTrendChart = ({ asinData, onClose }) => {
                       color: '#fff'
                     }}
 <<<<<<< HEAD
+<<<<<<< HEAD
                     formatter={(value, name) => [value.toLocaleString('it-IT'), name]}
 =======
+=======
+>>>>>>> 420b2b9 (first commit)
                     formatter={(value, name) => [
                       (typeof value === 'number' && isFinite(value)) ? value.toLocaleString('it-IT') : '—',
                       name
                     ]}
+<<<<<<< HEAD
 >>>>>>> 170550e (init: project baseline)
+=======
+>>>>>>> 420b2b9 (first commit)
                   />
                   <Legend wrapperStyle={{ color: '#fff' }} />
                   <Line yAxisId="left" type="monotone" dataKey="BSR" stroke="#82ca9d" strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 6 }} />

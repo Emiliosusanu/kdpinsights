@@ -79,10 +79,16 @@ body {
 }
 
 @layer components {
+<<<<<<< HEAD
 /* src/index.css */
 .glass-card {
   @apply bg-card/70 backdrop-blur-none border border-border rounded-2xl shadow-lg overflow-hidden;
 }
+=======
+  .glass-card {
+    @apply bg-card/70 backdrop-blur-none border border-border rounded-2xl shadow-lg overflow-hidden;
+  }
+>>>>>>> 420b2b9 (first commit)
   .glass-input {
     @apply bg-input/50 border-border rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring;
   }
